@@ -1,4 +1,5 @@
 tap "caskroom/cask"
+tap caskroom/fonts
 
 brew "zsh"
 
