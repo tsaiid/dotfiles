@@ -1,3 +1,5 @@
+export TERM="xterm-256color"
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -40,7 +42,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow osx rails zsh-syntax-highlighting heroku history-substring-search brew)
+plugins=(git git-flow osx rails zsh-syntax-highlighting heroku history-substring-search brew tmux docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,3 +104,5 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs history ram load time)
 # 使用 nerd font 時可以顯示更多 icon。詳情請參考 powerlevel9k wiki 
 POWERLEVEL9K_MODE='nerdfont-complete'
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
