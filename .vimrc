@@ -47,7 +47,7 @@ syntax on
 set nu
 
 " Switch window
-nmap <C-J> <C-W>j<C-W>_
-nmap <C-K> <C-W>k<C-W>_
-nmap <C-H> <C-W>h<C-W>_
-nmap <C-L> <C-W>l<C-W>_
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
+nmap <C-H> <C-W>h
+nmap <C-L> <C-W>l
