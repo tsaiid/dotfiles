@@ -7,6 +7,9 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs history ram load time)
+POWERLEVEL9K_MODE='awesome-fontconfig'
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Example aliases
@@ -52,10 +55,12 @@ DEFAULT_USER="tsaiid"
 
 # For ssh-agent
 SSH_ENV="$HOME/.ssh/environment"
+SSH_AGENT_PATH=`which ssh-agent`
+SED_PATH=`which sed`
 
 function start_agent {
 	echo "Initialising new SSH agent..."
-	/usr/bin/ssh-agent | /usr/bin/sed 's/^echo/#echo/' > "${SSH_ENV}"
+	${SSH_AGENT_PATH} | ${SED_PATH} 's/^echo/#echo/' > "${SSH_ENV}"
 	#echo succeeded
 	chmod 600 "${SSH_ENV}"
 	. "${SSH_ENV}" > /dev/null
@@ -97,12 +102,5 @@ export ARCH=x86_64
 
 export PIPENV_SHELL_COMPAT=1
 
-#powerlevel9k/powerlevel9k 
-# 左側
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
-# 右側
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs history ram load time)
-# 使用 nerd font 時可以顯示更多 icon。詳情請參考 powerlevel9k wiki 
-POWERLEVEL9K_MODE='nerdfont-complete'
-
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh   # for macOS
+[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh             # for Ubuntu
