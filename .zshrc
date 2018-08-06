@@ -86,9 +86,9 @@ export EDITOR="/usr/bin/vim"
 
 alias glog="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
-export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/.local/bin:$PATH
-export PATH=/Users/tsaiid/Library/Python/3.6/bin:$PATH
+export PATH=$HOME/Library/Python/3.6/bin:$PATH
 
 #bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
 #bindkey "${terminfo[kcud1]}" history-beginning-search-forward
