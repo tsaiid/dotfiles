@@ -31,9 +31,28 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 set laststatus=2
+set shiftround  " Shift to the next round tab stop.
 set shiftwidth=4
 set tabstop=4
 set expandtab
+set ignorecase  " Case Insensitivity Pattern Matching
+set smartcase   " Overrides ignorecase if pattern contains upcase
+set relativenumber  " Set relative number by default
+" Toggle Relative Number
+nnoremap <silent> <leader>nb :set relativenumber!<CR>
+
+" Search
+set hlsearch    " Enable Highlight Search
+set incsearch   " Highlight while search
+" Press <leader> / to remove search highlights
+noremap <silent> <leader>/ :noh<cr>
+" Keep search results at the center of screen
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 
 "set encoding=utf-8
 set fileencoding=utf-8
@@ -52,3 +71,41 @@ nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-H> <C-W>h
 nmap <C-L> <C-W>l
+
+" map the arrow keys to screen line movement instead of buffer line movement
+noremap <Up> gk
+noremap <Down> gj
+
+" Saves the file (handling the permission-denied error)
+cnoremap w!! w !sudo tee % >/dev/null
+
+" Switch between tabs
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+
+" Easily create a new tab.
+noremap <Leader>tN :tabnew<CR>
+" Easily close a tab.
+noremap <Leader>tc :tabclose<CR>
+" Easily move a tab.
+noremap <Leader>tm :tabmove<CR>
+" Easily go to next tab.
+noremap <Leader>tn :tabnext<CR>
+" Easily go to previous tab.
+noremap <Leader>tp :tabprevious<CR>
+
+" Removes trailing spaces
+function TrimWhiteSpace()
+  %s/\s*$//
+  ''
+endfunction
+
+set list listchars=trail:.,extends:>
+autocmd FileWritePre * call TrimWhiteSpace()
+autocmd FileAppendPre * call TrimWhiteSpace()
+autocmd FilterWritePre * call TrimWhiteSpace()
+autocmd BufWritePre * call TrimWhiteSpace()
