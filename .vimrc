@@ -13,7 +13,12 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -30,6 +35,7 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+let mapleader = "\<Space>"
 set laststatus=2
 set shiftround  " Shift to the next round tab stop.
 set shiftwidth=4
@@ -88,15 +94,16 @@ nnoremap <Leader>5 5gt
 nnoremap <Leader>6 6gt
 
 " Easily create a new tab.
-noremap <Leader>tN :tabnew<CR>
-" Easily close a tab.
-noremap <Leader>tc :tabclose<CR>
+noremap <Leader>t :tabnew<CR>
 " Easily move a tab.
-noremap <Leader>tm :tabmove<CR>
+"noremap <Leader>tm :tabmove<CR>
 " Easily go to next tab.
-noremap <Leader>tn :tabnext<CR>
+noremap <Leader>h gT
 " Easily go to previous tab.
-noremap <Leader>tp :tabprevious<CR>
+noremap <Leader>l gt
+
+noremap <leader>q :q<cr>
+nnoremap <leader>w :w<cr>
 
 " Removes trailing spaces
 function TrimWhiteSpace()
@@ -109,3 +116,9 @@ autocmd FileWritePre * call TrimWhiteSpace()
 autocmd FileAppendPre * call TrimWhiteSpace()
 autocmd FilterWritePre * call TrimWhiteSpace()
 autocmd BufWritePre * call TrimWhiteSpace()
+
+let g:airline_theme='luna'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
+
