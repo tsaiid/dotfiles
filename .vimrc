@@ -41,6 +41,7 @@ set shiftround  " Shift to the next round tab stop.
 set shiftwidth=4
 set tabstop=4
 set expandtab
+set backspace=indent,eol,start
 set ignorecase  " Case Insensitivity Pattern Matching
 set smartcase   " Overrides ignorecase if pattern contains upcase
 set relativenumber  " Set relative number by default
