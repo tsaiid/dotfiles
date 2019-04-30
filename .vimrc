@@ -123,3 +123,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 
+if has("termguicolors")
+    " fix bug for vim
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+
+    " enable true color
+    set termguicolors
+endif
