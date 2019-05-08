@@ -107,7 +107,21 @@ noremap <leader>q :q<cr>
 nnoremap <leader>w :w<cr>
 
 " EasyMotion
-map <Leader> <Plug>(easymotion-prefix)
+"map <Leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+let g:EasyMotion_smartcase = 1 " Turn on case-insensitive feature
+
+" End of EasyMotion
 
 " Removes trailing spaces
 function TrimWhiteSpace()
