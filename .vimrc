@@ -47,6 +47,7 @@ set backspace=indent,eol,start
 set ignorecase  " Case Insensitivity Pattern Matching
 set smartcase   " Overrides ignorecase if pattern contains upcase
 set relativenumber  " Set relative number by default
+set showcmd
 " Toggle Relative Number
 nnoremap <silent> <leader>nb :set relativenumber!<CR>
 
@@ -114,7 +115,7 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
+nmap <Leader>s <Plug>(easymotion-overwin-f)
 
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
