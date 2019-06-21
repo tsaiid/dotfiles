@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'jacoborus/tender.vim'
 
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
@@ -138,7 +138,11 @@ autocmd FileAppendPre * call TrimWhiteSpace()
 autocmd FilterWritePre * call TrimWhiteSpace()
 autocmd BufWritePre * call TrimWhiteSpace()
 
-let g:airline_theme='luna'
+" Theme
+syntax enable
+colorscheme tender
+
+let g:airline_theme='tender'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
