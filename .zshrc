@@ -55,6 +55,8 @@ source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER="tsaiid"
 
+export LANG=en_US.UTF-8
+
 # For ssh-agent
 SSH_ENV="$HOME/.ssh/environment"
 SSH_AGENT_PATH=`which ssh-agent`
