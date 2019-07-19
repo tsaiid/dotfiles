@@ -109,3 +109,7 @@ export PIPENV_SHELL_COMPAT=1
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh   # for macOS
 [ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh             # for Ubuntu
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
