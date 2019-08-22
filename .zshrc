@@ -47,7 +47,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow osx rails zsh-syntax-highlighting zsh-autosuggestions heroku history-substring-search brew tmux docker docker-compose)
+plugins=(git git-flow osx zsh-syntax-highlighting zsh-autosuggestions heroku history-substring-search brew tmux docker docker-compose ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,32 +56,6 @@ source $ZSH/oh-my-zsh.sh
 DEFAULT_USER="tsaiid"
 
 export LANG=en_US.UTF-8
-
-# For ssh-agent
-SSH_ENV="$HOME/.ssh/environment"
-SSH_AGENT_PATH=`which ssh-agent`
-SED_PATH=`which sed`
-
-function start_agent {
-	echo "Initialising new SSH agent..."
-	${SSH_AGENT_PATH} | ${SED_PATH} 's/^echo/#echo/' > "${SSH_ENV}"
-	#echo succeeded
-	chmod 600 "${SSH_ENV}"
-	. "${SSH_ENV}" > /dev/null
-	/usr/bin/ssh-add;
-}
-
-# Source SSH settings, if applicable
-
-if [ -f "${SSH_ENV}" ]; then
-	. "${SSH_ENV}" > /dev/null
-	#ps ${SSH_AGENT_PID} doesn’t work under cywgin
-	ps ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-		start_agent;
-	}
-else
-	start_agent;
-fi
 
 #export PAGER="most"
 export EDITOR="/usr/bin/vim"
