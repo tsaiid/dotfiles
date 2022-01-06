@@ -20,6 +20,11 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 "Plugin 'isRuslan/vim-es6'
+
+" vim-polyglot
+"" vim-yaml has a bug: https://github.com/stephpy/vim-yaml/issues/19
+let g:polyglot_disabled = ['yaml']
+
 Plugin 'sheerun/vim-polyglot'
 
 " All of your Plugins must be added before the following line
@@ -147,10 +152,6 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
 let g:airline_highlighting_cache = 1
-
-" vim-polyglot
-"" vim-yaml has a bug: https://github.com/stephpy/vim-yaml/issues/19
-let g:polyglot_disabled = ['yaml']
 
 if has("termguicolors")
     " fix bug for vim
