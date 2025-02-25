@@ -47,7 +47,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow osx zsh-syntax-highlighting zsh-autosuggestions heroku history-substring-search brew tmux docker docker-compose ssh-agent)
+plugins=(git git-flow macos zsh-syntax-highlighting zsh-autosuggestions history-substring-search brew tmux docker docker-compose ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -64,7 +64,6 @@ alias glog="git log --graph --abbrev-commit --decorate --date=relative --format=
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/Library/Python/3.6/bin:$PATH
 
 #bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
 #bindkey "${terminfo[kcud1]}" history-beginning-search-forward
@@ -73,14 +72,9 @@ bindkey -M emacs '^N' history-substring-search-down
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export ORACLE_HOME=/usr/local/share/oracle/instantclient_12_2
-export DYLD_LIBRARY_PATH=$ORACLE_HOME
-export LD_LIBRARY_PATH=$ORACLE_HOME
-export VERSION=12.2.0.1.0
-export ARCH=x86_64
-
 export PIPENV_SHELL_COMPAT=1
 
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh # for M1 Mac
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh   # for macOS
 [ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh             # for Ubuntu
 
