@@ -51,6 +51,7 @@ set expandtab
 set backspace=indent,eol,start
 set ignorecase  " Case Insensitivity Pattern Matching
 set smartcase   " Overrides ignorecase if pattern contains upcase
+set cursorline    " 標示目前所在的行
 set relativenumber  " Set relative number by default
 set showcmd
 " Toggle Relative Number
@@ -142,6 +143,12 @@ autocmd FileWritePre * call TrimWhiteSpace()
 autocmd FileAppendPre * call TrimWhiteSpace()
 autocmd FilterWritePre * call TrimWhiteSpace()
 autocmd BufWritePre * call TrimWhiteSpace()
+
+" --- YAML 檔案專用設定 ---
+" 自動將 Tab 轉為 2 個空格，並設定縮排寬度為 2
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yaml set list
+autocmd FileType yaml set listchars=tab:→\ ,space:·,trail:·
 
 " Theme
 colorscheme tender
