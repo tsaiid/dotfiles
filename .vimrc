@@ -1,173 +1,155 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" ==========================================
+" 1. Plugin 管理 (使用 vim-plug)
+" ==========================================
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" 介面與外觀
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jacoborus/tender.vim'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" 功能增強
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'vim-airline/vim-airline'
-Plugin 'jacoborus/tender.vim'
-
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-"Plugin 'isRuslan/vim-es6'
-
-" vim-polyglot
-"" vim-yaml has a bug: https://github.com/stephpy/vim-yaml/issues/19
+" 語言支援 (Polyglot 支援大多數語言)
 let g:polyglot_disabled = ['yaml']
+Plug 'sheerun/vim-polyglot'
 
-Plugin 'sheerun/vim-polyglot'
+call plug#end()
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
+" ==========================================
+" 2. 基礎設定 (Basic Settings)
+" ==========================================
 let mapleader = "\<Space>"
-set laststatus=2
-set shiftround  " Shift to the next round tab stop.
-set shiftwidth=4
-set tabstop=4
-set expandtab
-set backspace=indent,eol,start
-set ignorecase  " Case Insensitivity Pattern Matching
-set smartcase   " Overrides ignorecase if pattern contains upcase
-set cursorline    " 標示目前所在的行
-set relativenumber  " Set relative number by default
-set showcmd
-" Toggle Relative Number
-nnoremap <silent> <leader>nb :set relativenumber!<CR>
 
-" Search
-set hlsearch    " Enable Highlight Search
-set incsearch   " Highlight while search
-" Press <leader> / to remove search highlights
-noremap <silent> <leader>/ :noh<cr>
-" Keep search results at the center of screen
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
+set nocompatible
+filetype plugin indent on
+syntax on
 
-"set encoding=utf-8
+set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8,big5,gbk,euc-jp,euc-kr,utf-bom,iso8859-1
 set termencoding=utf-8
 
+" --- 核心體驗優化 ---
+set hidden          " 【關鍵】允許切換 Buffer 時不存檔 (Buffer workflow 必備)
+set history=1000    " 增加指令歷史紀錄
+set scrolloff=5     " 光標移動到邊緣時，保留 5 行視距 (防撞牆)
+set backspace=indent,eol,start
+set mouse=a         " 允許滑鼠點擊
+
+" --- 顯示設定 ---
+set number          " 顯示行號
+set relativenumber  " 相對行號
+set cursorline      " 高亮當前行
+set laststatus=2
+set showcmd
+set signcolumn=yes  " 固定左側欄寬度，防止畫面跳動
+set ch=1            " cmd line 高度
+
+" --- 縮排與搜尋 ---
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set shiftround
+set smartindent
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" --- 剪貼簿 ---
+set clipboard=unnamed
+
+" --- 備份檔案處理 ---
 set nobackup
+set nowritebackup
+set noswapfile      " 不產生 .swp 檔
 
-set ch=2
+" --- 真彩色 (True Color) ---
+if (has("termguicolors"))
+    set termguicolors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
 
-syntax on
-set nu
+" ==========================================
+" 3. 快捷鍵 (Mappings)
+" ==========================================
 
-" Switch window
+" --- Buffer 切換 (取代原本的 Tab) ---
+" 使用 Tab 鍵切換下一個檔案，Shift-Tab 切換上一個
+nnoremap <TAB> :bnext<CR>
+nnoremap <S-TAB> :bprev<CR>
+
+" 快速關閉目前的 Buffer (不關閉視窗)
+nnoremap <leader>bd :bd<CR>
+
+" --- 視窗操作 ---
+" 視窗分割後，讓游標直接切過去
+set splitbelow
+set splitright
+
+" 視窗切換
 nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-H> <C-W>h
 nmap <C-L> <C-W>l
 
-" map the arrow keys to screen line movement instead of buffer line movement
+" --- 搜尋與存檔 ---
+" 快速取消搜尋高亮
+noremap <silent> <leader>/ :noh<CR>
+" 搜尋結果維持置中
+nnoremap n nzz
+nnoremap N Nzz
+
+" 快速存檔/退出
+nnoremap <leader>w :w<CR>
+noremap <leader>q :q<CR>
+" Sudo 存檔
+cnoremap w!! w !sudo tee % >/dev/null
+
+" 移動 (處理 wrap line)
 noremap <Up> gk
 noremap <Down> gj
 
-" Saves the file (handling the permission-denied error)
-cnoremap w!! w !sudo tee % >/dev/null
+" ==========================================
+" 4. 外掛設定 (Plugin Configs)
+" ==========================================
 
-" Switch between tabs
-nnoremap <Leader>1 1gt
-nnoremap <Leader>2 2gt
-nnoremap <Leader>3 3gt
-nnoremap <Leader>4 4gt
-nnoremap <Leader>5 5gt
-nnoremap <Leader>6 6gt
+" --- Theme: Tender ---
+try
+    colorscheme tender
+catch
+    colorscheme desert
+endtry
 
-" Easily create a new tab.
-noremap <Leader>t :tabnew<CR>
-" Easily move a tab.
-"noremap <Leader>tm :tabmove<CR>
-" Easily go to next tab.
-noremap <Leader>h gT
-" Easily go to previous tab.
-noremap <Leader>l gt
+" --- Airline (狀態列) ---
+let g:airline_theme='tender'
+let g:airline#extensions#tabline#enabled = 1
+" 【關鍵】讓上方 Bar 顯示 Buffer 列表，看起來像 Tab，但其實是 Buffer
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_powerline_fonts = 1
 
-noremap <leader>q :q<cr>
-nnoremap <leader>w :w<cr>
-
-" EasyMotion
-"map <Leader> <Plug>(easymotion-prefix)
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
+" --- EasyMotion ---
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
 nmap <Leader>s <Plug>(easymotion-overwin-f)
-
-" JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-let g:EasyMotion_smartcase = 1 " Turn on case-insensitive feature
+" ==========================================
+" 5. 自定義功能
+" ==========================================
 
-" End of EasyMotion
+" --- YAML 專用設定 ---
+augroup yaml_fix
+    autocmd!
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+augroup END
 
-" Removes trailing spaces
-function TrimWhiteSpace()
-  %s/\s*$//
-  ''
-endfunction
-
-set list listchars=tab:>-,trail:~,extends:>,precedes:<
-autocmd FileWritePre * call TrimWhiteSpace()
-autocmd FileAppendPre * call TrimWhiteSpace()
-autocmd FilterWritePre * call TrimWhiteSpace()
-autocmd BufWritePre * call TrimWhiteSpace()
-
-" --- YAML 檔案專用設定 ---
-" 自動將 Tab 轉為 2 個空格，並設定縮排寬度為 2
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType yaml set list
-autocmd FileType yaml set listchars=tab:→\ ,space:·,trail:·
-
-" Theme
-colorscheme tender
-
-let g:airline_theme='tender'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_powerline_fonts = 1
-let g:airline_highlighting_cache = 1
-
-if has("termguicolors")
-    " fix bug for vim
-    set t_8f=[38;2;%lu;%lu;%lum
-    set t_8b=[48;2;%lu;%lu;%lum
-
-    " enable true color
-    set termguicolors
-endif
-
-" 讓 Vim 的預設暫存器與系統剪貼簿共用
-set clipboard=unnamed
+" --- 手動刪除行尾空白指令 ---
+" 輸入 :StripWhitespace 即可執行，不再自動觸發
+command! StripWhitespace %s/\s\+$//e
