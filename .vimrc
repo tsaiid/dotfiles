@@ -168,3 +168,6 @@ if has("termguicolors")
     " enable true color
     set termguicolors
 endif
+
+" 讓 Vim 的預設暫存器與系統剪貼簿共用
+set clipboard=unnamed
